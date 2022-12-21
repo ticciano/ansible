@@ -1,0 +1,10 @@
+server {
+    listen {{ nginx_port }} default_server;
+    listen [::]:{{ nginx_port }} default_server; 
+    root /var/www/html;  
+    index index.html; 
+    server_name _;  
+    location / {
+       proxy_pass http://www.uol.com.br;
+     }
+}

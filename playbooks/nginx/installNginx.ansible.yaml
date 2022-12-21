@@ -1,0 +1,23 @@
+- name: install and configure 
+  hosts: testServer
+  remote_user: root
+
+  vars:
+    nginx_port: 81
+
+  tasks:
+    - name: install nginx
+      apt: name=nginx state=latest
+
+    - name: create nginx configuration file
+      template: src=nginx.conf.j2 dest=/etc/nginx/conf.d/default.conf
+
+    # - name: create nginx log file
+    #   file: path=/var/log/nginx.log state=touch owner=nginx group=nginx mode=0775
+
+    - name: start nginx service
+      service: name=nginx state=started enabled=yes
+
+  handlers:
+  - name: restart nginx
+    service: name=nginx state=restarted

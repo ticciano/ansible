@@ -1,0 +1,5 @@
+[testServer]
+172.17.0.2
+
+[testServer:vars]
+ansible_user=root
